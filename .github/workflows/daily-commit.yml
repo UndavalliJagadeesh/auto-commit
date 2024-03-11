@@ -1,7 +1,7 @@
 name: Daily Commit
 on:
   schedule:
-    - cron: "17 13 * * *"
+    - cron: "38 13 * * *"
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,8 +16,8 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          git config --global user.name "JagadeeshUndavalli"
-          git config --global user.email "20pa1a05h6@vishnu.edu.in"
+          git config user.name "JagadeeshUndavalli"
+          git config user.email "20pa1a05h6@vishnu.edu.in"
           git add .
           git commit -m "Added current date"
-          git push
+          git push https://github.com/UndavalliJagadeesh/git-daily-commit.git HEAD:main

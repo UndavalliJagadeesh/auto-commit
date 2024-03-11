@@ -16,8 +16,8 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
-          git config user.name "Jagadeesh Undavalli"
-          git config user.email "20pa1a05h6@vishnu.edu.in"
-          git add date.txt
+          git config --global user.name "JagadeeshUndavalli"
+          git config --global user.email "20pa1a05h6@vishnu.edu.in"
+          git add .
           git commit -m "Added current date"
           git push

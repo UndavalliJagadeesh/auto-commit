@@ -1,22 +1,23 @@
 name: Daily Commit
 on:
   schedule:
-    - cron: "39 05 * * *"
+    - cron: "00 06 * * *"
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
-      - name: Append number to file
-        run: echo $(($(cat number.txt)+1)) > number.txt
+      - name: Append date to file
+        run: echo $(date) > date.txt
       - name: Debug
-        run: cat number.txt
+        run: cat date.txt
       - name: Commit changes
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           git config user.name "Jagadeesh Undavalli"
           git config user.email "20pa1a05h6@vishnu.edu.in"
-          git add number.txt
-          git commit -m "Added new number"
+          git add date.txt
+          git commit -m "Added current date"
+          git push

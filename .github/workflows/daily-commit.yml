@@ -1,7 +1,7 @@
 name: Daily Commit
 on:
   schedule:
-    - cron: "00 06 * * *"
+    - cron: "17 13 * * *"
 jobs:
   build:
     runs-on: ubuntu-latest

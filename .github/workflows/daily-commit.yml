@@ -1,23 +1,26 @@
-name: Daily Commit
+name: Daily Update
+
 on:
   schedule:
-    - cron: "38 13 * * *"
+    - cron: '00 05 * * *'
+
 jobs:
-  build:
+  update:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v2
-      - name: Append date to file
-        run: echo $(date) > date.txt
-      - name: Debug
-        run: cat date.txt
-      - name: Commit changes
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      - uses: actions/checkout@v3
+
+      - name: Update date.txt
         run: |
-          git config user.name "JagadeeshUndavalli"
-          git config user.email "20pa1a05h6@vishnu.edu.in"
-          git add .
-          git commit -m "Added current date"
-          git push https://github.com/UndavalliJagadeesh/git-daily-commit.git HEAD:main
+          echo $(date +%Y-%m-%d) >> date.txt
+
+      - name: Add and commit changes
+        run: |
+          git config --local user.email "20pa1a05h6@vishnu.edu.in"
+          git config --local user.name "Jagadeesh Undavalli"
+          git add date.txt
+          git commit -m "Daily update: $(date +%Y-%m-%d)"
+          
+      - name: Push changes
+        run: |
+          git push origin ${{ secrets.GITHUB_TOKEN }}
